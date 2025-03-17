@@ -3,8 +3,10 @@
 
 typedef enum {
   // =============================
-  // R-TYPE INSTRUCTIONS (Register)
+  // R-TYPE INSTRUCTIONS (REGISTER)
   // =============================
+
+  // ---- 32-BIT INSTRUCTIONS ----
   TOKEN_ADD,      // add
   TOKEN_ADDU,     // addu
   TOKEN_SUB,      // sub
@@ -32,9 +34,23 @@ typedef enum {
   TOKEN_MTC0,     // mtc0
   TOKEN_MFC0,     // mfc0
 
+  // ---- 64-BIT INSTRUCTIONS ----
+  // TOKEN_DADD,      // dadd
+  // TOKEN_DADDU,     // daddu
+  // TOKEN_DSUB,      // dsub
+  // TOKEN_DSUBU,     // dsubu
+  // TOKEN_DMULT,     // dmult
+  // TOKEN_DMULTU,    // dmultu
+  // TOKEN_DDIV,      // ddiv
+  // TOKEN_DDIVU,     // ddivu
+  // TOKEN_MFHI64,    // mfhi (64-bit)
+  // TOKEN_MFLO64,    // mflo (64-bit)
+
   // =============================
-  // I-TYPE INSTRUCTIONS (Immediate)
+  // I-TYPE INSTRUCTIONS (IMMEDIATE)
   // =============================
+
+  // ---- 32-BIT INSTRUCTIONS ----
   TOKEN_ADDI,     // addi
   TOKEN_ADDIU,    // addiu
   TOKEN_ANDI,     // andi
@@ -44,9 +60,16 @@ typedef enum {
   TOKEN_SLTIU,    // sltiu
   TOKEN_LUI,      // lui
 
+  // ---- 64-BIT INSTRUCTIONS ----
+  // TOKEN_LWU,       // lwu
+  // TOKEN_LD,        // ld
+  // TOKEN_SD,        // sd
+
   // =============================
-  // J-TYPE INSTRUCTIONS (Jump)
+  // J-TYPE INSTRUCTIONS (JUMP)
   // =============================
+
+  // ---- 32-BIT INSTRUCTIONS ----
   TOKEN_JR,       // jr
   TOKEN_J,        // j
   TOKEN_JAL,      // jal
@@ -54,9 +77,15 @@ typedef enum {
   TOKEN_JIALC,    // jialc
   TOKEN_JRHB,     // jrhb
 
+  // ---- 64-BIT INSTRUCTIONS ----
+  // TOKEN_JR64,      // jr (64-bit)
+  // TOKEN_JALR64,    // jalr (64-bit)
+
   // =============================
-  // MEMORY REFERENCE INSTRUCTIONS
+  // MEMORY REFERENCE INSTRUCTIONS (LOAD/STORE)
   // =============================
+
+  // ---- 32-BIT INSTRUCTIONS ----
   TOKEN_LW,       // lw
   TOKEN_LH,       // lh
   TOKEN_LHU,      // lhu
@@ -65,105 +94,101 @@ typedef enum {
   TOKEN_SW,       // sw
   TOKEN_SH,       // sh
   TOKEN_SB,       // sb
-  TOKEN_LWL,      // lwl
-  TOKEN_LWR,      // lwr
-  TOKEN_SWL,      // swl
-  TOKEN_SWR,      // swr
+
+  // ---- 64-BIT INSTRUCTIONS ----
+  // TOKEN_LDL,       // ldl
+  // TOKEN_LDR,       // ldr
+  // TOKEN_SDL,       // sdl
+  // TOKEN_SDR,       // sdr
 
   // =============================
-  // CONDITIONAL INSTRUCTIONS (Branch)
+  // CONDITIONAL INSTRUCTIONS (BRANCH)
   // =============================
+
+  // ---- 32-BIT INSTRUCTIONS ----
   TOKEN_BEQ,      // beq
   TOKEN_BNE,      // bne
   TOKEN_BLEZ,     // blez
   TOKEN_BGTZ,     // bgtz
   TOKEN_BLTZ,     // bltz
   TOKEN_BGEZ,     // bgez
-  TOKEN_BLTZAL,   // bltzal
-  TOKEN_BGEZAL,   // bgezal
+
+  // ---- 64-BIT INSTRUCTIONS ----
+  // TOKEN_DSLT,      // dslt
+  // TOKEN_DSLTU,     // dsltu
+  // TOKEN_DSEQ,      // dseq
+  // TOKEN_DSNE,      // dsne
 
   // =============================
   // FLOATING POINT INSTRUCTIONS
   // =============================
+
+  // ---- SINGLE PRECISION (32-bit) ----
   TOKEN_ADDS,     // add.s
   TOKEN_SUBS,     // sub.s
   TOKEN_MULS,     // mul.s
   TOKEN_DIVS,     // div.s
   TOKEN_CVTSW,    // cvt.s.w
-  TOKEN_C_EQ_S,   // c.eq.s
-  TOKEN_C_LT_S,   // c.lt.s
-  TOKEN_C_LE_S,   // c.le.s
+
+  // ---- DOUBLE PRECISION (64-bit) ----
+  // TOKEN_ADDD,      // add.d
+  // TOKEN_SUBD,      // sub.d
+  // TOKEN_MULD,      // mul.d
+  // TOKEN_DIVD,      // div.d
 
   // =============================
-  // SYSTEM CALL INSTRUCTIONS
+  // SYSTEM CALL INSTRUCTIONS (SYSCALLS)
   // =============================
   TOKEN_SYSCALL,  // syscall
   TOKEN_BREAK,    // break
-  TOKEN_ERET,     // eret
-  TOKEN_WAIT,     // wait
 
-  // =============================
-  // ATOMIC INSTRUCTIONS (Sync)
-  // =============================
-  TOKEN_LL,       // ll
-  TOKEN_SC,       // sc
-  TOKEN_SYNC,     // sync
-
-  // =============================
-  // EXTRA INSTRUCTIONS
-  // =============================
-  TOKEN_CACHE,    // cache
-  TOKEN_PREF,     // pref
+  // ---- 64-BIT INSTRUCTIONS ----
+  // TOKEN_SYSCALL64, // syscall (64-bit)
+  // TOKEN_BREAK64,   // break (64-bit)
 
   // =============================
   // META-TOKENS & STRUCTURAL
   // =============================
-  TOKEN_EOF,       // End of file
-  TOKEN_ERROR,     // Error/Unknown token
-  TOKEN_UNKNOWN,   // Unknown instruction
-  TOKEN_NEWLINE,   // \n
-  TOKEN_WHITESPACE,// Whitespace (tabs, spaces)
+  TOKEN_EOF,        // End of file
+  TOKEN_ERROR,      // Error
+  TOKEN_UNKNOWN,    // Unknown token
+  TOKEN_NEWLINE,    // Newline
+  TOKEN_WHITESPACE, // Whitespace
 
-  // Comments
-  TOKEN_COMMENT,   // // or /* */
+  // =============================
+  // DELIMITERS AND SEPARATORS
+  // =============================
+  TOKEN_COMMA,      // ,
+  TOKEN_COLON,      // :
+  TOKEN_SEMICOLON,  // ;
+  TOKEN_LPAREN,     // (
+  TOKEN_RPAREN,     // )
+  TOKEN_LBRACE,     // {
+  TOKEN_RBRACE,     // }
 
-  // Delimiters & Separators
-  TOKEN_COMMA,     // ,
-  TOKEN_COLON,     // :
-  TOKEN_SEMICOLON, // ;
-  TOKEN_LPAREN,    // (
-  TOKEN_RPAREN,    // )
-  TOKEN_LBRACE,    // {
-  TOKEN_RBRACE,    // }
+  // =============================
+  // LITERALS AND IDENTIFIERS
+  // =============================
+  TOKEN_INT_LITERAL,   // Integer literal
+  TOKEN_FLOAT_LITERAL, // Floating point literal
+  TOKEN_IDENTIFIER,    // Identifier
+  TOKEN_REGISTER,      // Register (, , etc.)
 
-  // Literals & Identifiers
-  TOKEN_INT_LITERAL,   // 123, 0x7F, etc.
-  TOKEN_FLOAT_LITERAL, // 1.5, 2.75, etc.
-  TOKEN_IDENTIFIER,    // variable names, labels
-  TOKEN_REGISTER,      // , , etc.
-
-  // Operators
+  // =============================
+  // OPERATORS
+  // =============================
   TOKEN_PLUS,      // +
   TOKEN_MINUS,     // -
   TOKEN_STAR,      // *
   TOKEN_SLASH,     // /
   TOKEN_PERCENT,   // %
   TOKEN_EQUAL,     // =
-  TOKEN_AMPERSAND, // &
-  TOKEN_PIPE,      // |
-  TOKEN_CARET,     // ^
-  TOKEN_TILDE,     // ~
-  TOKEN_LT,        // <
-  TOKEN_GT,        // >
-  TOKEN_LE,        // <=
-  TOKEN_GE,        // >=
-  TOKEN_EQ,        // ==
-  TOKEN_NE,        // !=
 
-  // Preprocessor/Directives
-  TOKEN_DIRECTIVE, // .data, .text, .globl, etc.
-  TOKEN_MACRO      // Inline macro definitions
-
+  // =============================
+  // PREPROCESSOR AND DIRECTIVES
+  // =============================
+  TOKEN_DIRECTIVE, // .data, .text, etc.
+  TOKEN_MACRO      // macro
 } TokenType;
 
 #endif // TOKEN_TYPE_H
