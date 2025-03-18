@@ -1,6 +1,8 @@
 #ifndef TOKEN_LIST_H
 #define TOKEN_LIST_H
 
+#include <stdlib.h>
+#include <string.h>
 #include "token.h"
 
 typedef struct {

@@ -1,5 +1,7 @@
 #include "token.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 Token* createToken(TokenType type, const char* lexeme){
   Token* token = (Token*)malloc(sizeof(Token));
@@ -21,7 +23,7 @@ void freeToken(Token* token){
   }
 }
 
-void printToken(Token* token){
+void printToken(const Token* token){
   if (token != NULL){
     printf("Token(Type: %d, Lexeme: '%s')\n", token->type, token->lexeme);
   }
