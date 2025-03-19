@@ -17,7 +17,7 @@ void free_token_list(TokenList* tokenList);
 void token_list_resize(TokenList* tokenList);
 void token_list_clear(TokenList* tokenList);
 
-void token_list_append(TokenList* tokenList, Token token);
+void token_list_append(TokenList* tokenList, Token* token);
 void token_list_pop_back(TokenList* tokenList);
 const Token* token_list_get(TokenList* tokenList, size_t index);
 

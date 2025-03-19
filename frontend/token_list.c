@@ -57,14 +57,14 @@ void token_list_clear(TokenList* tokenList){
   }
 }
 
-void token_list_append(TokenList* tokenList, Token token){
+void token_list_append(TokenList* tokenList, Token* token){
   size_t index = tokenList->size;
   if (index == tokenList->capacity){
     printf("Token List is Full, Resizing...");
     token_list_resize(tokenList);
   }
-  tokenList->arr[index].type = token.type;
-  tokenList->arr[index].lexeme = strdup(token.lexeme);
+  tokenList->arr[index].type = token->type;
+  tokenList->arr[index].lexeme = strdup(token->lexeme);
   tokenList->size++;
 }
 
