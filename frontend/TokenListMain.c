@@ -4,11 +4,11 @@ int main(){
   TokenList tokenList;
   init_token_list(&tokenList);
 
-  // Example 1 : addi $t0, &t1, 10
+  // Example 1 : addi $t0, $t1, 10
   Token* addi = createToken(TOKEN_ADDI,"addi");
   Token* var0 = createToken(TOKEN_REGISTER,"$t0");
   Token* comma0 = createToken(TOKEN_COMMA, ",");
-  Token* var1 = createToken(TOKEN_REGISTER,"&t1");
+  Token* var1 = createToken(TOKEN_REGISTER,"$t1");
   Token* comma1 = createToken(TOKEN_COMMA, ",");
 
   token_list_append(&tokenList, addi);

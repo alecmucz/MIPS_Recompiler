@@ -25,7 +25,7 @@ void freeToken(Token* token){
 
 void printToken(const Token* token){
   if (token != NULL){
-    printf("Token(Type: %d, Lexeme: '%s')\n", token->type, token->lexeme);
+    printf("Token(Type: %s, Lexeme: '%s')\n", getTokenTypeName(token->type), token->lexeme);
   }
 }
 

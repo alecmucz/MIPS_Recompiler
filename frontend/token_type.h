@@ -1,194 +1,136 @@
 #ifndef TOKEN_TYPE_H
 #define TOKEN_TYPE_H
 
+// =============================
+// Define all token types using an X-Macro
+// =============================
+#define TOKEN_TYPES_LIST \
+    /* ============================= */ \
+    /* R-TYPE INSTRUCTIONS (REGISTER) */\
+    /* ============================= */ \
+    X(TOKEN_ADD, "add") \
+    X(TOKEN_ADDU, "addu") \
+    X(TOKEN_SUB, "sub") \
+    X(TOKEN_SUBU, "subu") \
+    X(TOKEN_AND, "and") \
+    X(TOKEN_OR, "or") \
+    X(TOKEN_XOR, "xor") \
+    X(TOKEN_NOR, "nor") \
+    X(TOKEN_SLL, "sll") \
+    X(TOKEN_SRL, "srl") \
+    X(TOKEN_SRA, "sra") \
+    X(TOKEN_SLLV, "sllv") \
+    X(TOKEN_SRLV, "srlv") \
+    X(TOKEN_SRAV, "srav") \
+    X(TOKEN_SLT, "slt") \
+    X(TOKEN_SLTU, "sltu") \
+    X(TOKEN_MULT, "mult") \
+    X(TOKEN_MULTU, "multu") \
+    X(TOKEN_DIV, "div") \
+    X(TOKEN_DIVU, "divu") \
+    X(TOKEN_MFHI, "mfhi") \
+    X(TOKEN_MFLO, "mflo") \
+    X(TOKEN_MOVN, "movn") \
+    X(TOKEN_MOVZ, "movz") \
+    X(TOKEN_MTC0, "mtc0") \
+    X(TOKEN_MFC0, "mfc0") \
+    /* ---- 64-BIT INSTRUCTIONS ---- */ \
+    X(TOKEN_DADD, "dadd") \
+    X(TOKEN_DADDU, "daddu") \
+    X(TOKEN_DSUB, "dsub") \
+    X(TOKEN_DSUBU, "dsubu") \
+    X(TOKEN_DMULT, "dmult") \
+    X(TOKEN_DMULTU, "dmultu") \
+    X(TOKEN_DDIV, "ddiv") \
+    X(TOKEN_DDIVU, "ddivu") \
+    X(TOKEN_MFHI64, "mfhi64") \
+    X(TOKEN_MFLO64, "mflo64") \
+    /* ============================= */   \
+    /* I-TYPE INSTRUCTIONS (IMMEDIATE) */ \
+    /* ============================= */   \
+    X(TOKEN_ADDI, "addi") \
+    X(TOKEN_ADDIU, "addiu") \
+    X(TOKEN_ANDI, "andi") \
+    X(TOKEN_ORI, "ori") \
+    X(TOKEN_XORI, "xori") \
+    X(TOKEN_SLTI, "slti") \
+    X(TOKEN_SLTIU, "sltiu") \
+    X(TOKEN_LUI, "lui") \
+    /* ---- 64-BIT INSTRUCTIONS ---- */ \
+    X(TOKEN_LWU, "lwu") \
+    X(TOKEN_LD, "ld") \
+    X(TOKEN_SD, "sd") \
+    /* ============================= */ \
+    /* J-TYPE INSTRUCTIONS (JUMP) */    \
+    /* ============================= */ \
+    X(TOKEN_JR, "jr") \
+    X(TOKEN_J, "j") \
+    X(TOKEN_JAL, "jal") \
+    X(TOKEN_JALR, "jalr") \
+    X(TOKEN_JIALC, "jialc") \
+    X(TOKEN_JRHB, "jrhb") \
+    /* ---- 64-BIT INSTRUCTIONS ---- */ \
+    X(TOKEN_JR64, "jr64") \
+    X(TOKEN_JALR64, "jalr64") \
+    /* ============================= */               \
+    /* MEMORY REFERENCE INSTRUCTIONS (LOAD/STORE) */  \
+    /* ============================= */               \
+    X(TOKEN_LW, "lw") \
+    X(TOKEN_LH, "lh") \
+    X(TOKEN_LHU, "lhu") \
+    X(TOKEN_LB, "lb") \
+    X(TOKEN_LBU, "lbu") \
+    X(TOKEN_SW, "sw") \
+    X(TOKEN_SH, "sh") \
+    X(TOKEN_SB, "sb") \
+    /* ---- 64-BIT INSTRUCTIONS ---- */ \
+    X(TOKEN_LDL, "ldl") \
+    X(TOKEN_LDR, "ldr") \
+    X(TOKEN_SDL, "sdl") \
+    X(TOKEN_SDR, "sdr") \
+    /* ============================= */ \
+    /* META-TOKENS & STRUCTURAL */      \
+    /* ============================= */ \
+    X(TOKEN_EOF, "EOF") \
+    X(TOKEN_ERROR, "error") \
+    X(TOKEN_UNKNOWN, "unknown") \
+    /* ============================= */ \
+    /* DELIMITERS AND SEPARATORS */     \
+    /* ============================= */ \
+    X(TOKEN_COMMA, ",") \
+    X(TOKEN_COLON, ":") \
+    X(TOKEN_SEMICOLON, ";") \
+    X(TOKEN_LPAREN, "(") \
+    X(TOKEN_RPAREN, ")") \
+    X(TOKEN_LBRACE, "{") \
+    X(TOKEN_RBRACE, "}") \
+    /* ============================= */ \
+    /* LITERALS AND IDENTIFIERS */      \
+    /* ============================= */ \
+    X(TOKEN_INT_LITERAL, "int literal") \
+    X(TOKEN_FLOAT_LITERAL, "float literal") \
+    X(TOKEN_IDENTIFIER, "identifier") \
+    X(TOKEN_REGISTER, "register") \
+    /* ============================= */ \
+    /* OPERATORS */                     \
+    /* ============================= */ \
+    X(TOKEN_PLUS, "+") \
+    X(TOKEN_MINUS, "-") \
+    X(TOKEN_STAR, "*") \
+    X(TOKEN_SLASH, "/") \
+    X(TOKEN_PERCENT, "%") \
+    X(TOKEN_EQUAL, "=") \
+    X(TOKEN_DIRECTIVE, "directive") \
+    X(TOKEN_MACRO, "macro")
+
 typedef enum {
-  // =============================
-  // R-TYPE INSTRUCTIONS (REGISTER)
-  // =============================
-
-  // ---- 32-BIT INSTRUCTIONS ----
-  TOKEN_ADD,      // add
-  TOKEN_ADDU,     // addu
-  TOKEN_SUB,      // sub
-  TOKEN_SUBU,     // subu
-  TOKEN_AND,      // and
-  TOKEN_OR,       // or
-  TOKEN_XOR,      // xor
-  TOKEN_NOR,      // nor
-  TOKEN_SLL,      // sll
-  TOKEN_SRL,      // srl
-  TOKEN_SRA,      // sra
-  TOKEN_SLLV,     // sllv
-  TOKEN_SRLV,     // srlv
-  TOKEN_SRAV,     // srav
-  TOKEN_SLT,      // slt
-  TOKEN_SLTU,     // sltu
-  TOKEN_MULT,     // mult
-  TOKEN_MULTU,    // multu
-  TOKEN_DIV,      // div
-  TOKEN_DIVU,     // divu
-  TOKEN_MFHI,     // mfhi
-  TOKEN_MFLO,     // mflo
-  TOKEN_MOVN,     // movn
-  TOKEN_MOVZ,     // movz
-  TOKEN_MTC0,     // mtc0
-  TOKEN_MFC0,     // mfc0
-
-  // ---- 64-BIT INSTRUCTIONS ----
-  // TOKEN_DADD,      // dadd
-  // TOKEN_DADDU,     // daddu
-  // TOKEN_DSUB,      // dsub
-  // TOKEN_DSUBU,     // dsubu
-  // TOKEN_DMULT,     // dmult
-  // TOKEN_DMULTU,    // dmultu
-  // TOKEN_DDIV,      // ddiv
-  // TOKEN_DDIVU,     // ddivu
-  // TOKEN_MFHI64,    // mfhi (64-bit)
-  // TOKEN_MFLO64,    // mflo (64-bit)
-
-  // =============================
-  // I-TYPE INSTRUCTIONS (IMMEDIATE)
-  // =============================
-
-  // ---- 32-BIT INSTRUCTIONS ----
-  TOKEN_ADDI,     // addi
-  TOKEN_ADDIU,    // addiu
-  TOKEN_ANDI,     // andi
-  TOKEN_ORI,      // ori
-  TOKEN_XORI,     // xori
-  TOKEN_SLTI,     // slti
-  TOKEN_SLTIU,    // sltiu
-  TOKEN_LUI,      // lui
-
-  // ---- 64-BIT INSTRUCTIONS ----
-  // TOKEN_LWU,       // lwu
-  // TOKEN_LD,        // ld
-  // TOKEN_SD,        // sd
-
-  // =============================
-  // J-TYPE INSTRUCTIONS (JUMP)
-  // =============================
-
-  // ---- 32-BIT INSTRUCTIONS ----
-  TOKEN_JR,       // jr
-  TOKEN_J,        // j
-  TOKEN_JAL,      // jal
-  TOKEN_JALR,     // jalr
-  TOKEN_JIALC,    // jialc
-  TOKEN_JRHB,     // jrhb
-
-  // ---- 64-BIT INSTRUCTIONS ----
-  // TOKEN_JR64,      // jr (64-bit)
-  // TOKEN_JALR64,    // jalr (64-bit)
-
-  // =============================
-  // MEMORY REFERENCE INSTRUCTIONS (LOAD/STORE)
-  // =============================
-
-  // ---- 32-BIT INSTRUCTIONS ----
-  TOKEN_LW,       // lw
-  TOKEN_LH,       // lh
-  TOKEN_LHU,      // lhu
-  TOKEN_LB,       // lb
-  TOKEN_LBU,      // lbu
-  TOKEN_SW,       // sw
-  TOKEN_SH,       // sh
-  TOKEN_SB,       // sb
-
-  // ---- 64-BIT INSTRUCTIONS ----
-  // TOKEN_LDL,       // ldl
-  // TOKEN_LDR,       // ldr
-  // TOKEN_SDL,       // sdl
-  // TOKEN_SDR,       // sdr
-
-  // =============================
-  // CONDITIONAL INSTRUCTIONS (BRANCH)
-  // =============================
-
-  // ---- 32-BIT INSTRUCTIONS ----
-  TOKEN_BEQ,      // beq
-  TOKEN_BNE,      // bne
-  TOKEN_BLEZ,     // blez
-  TOKEN_BGTZ,     // bgtz
-  TOKEN_BLTZ,     // bltz
-  TOKEN_BGEZ,     // bgez
-
-  // ---- 64-BIT INSTRUCTIONS ----
-  // TOKEN_DSLT,      // dslt
-  // TOKEN_DSLTU,     // dsltu
-  // TOKEN_DSEQ,      // dseq
-  // TOKEN_DSNE,      // dsne
-
-  // =============================
-  // FLOATING POINT INSTRUCTIONS
-  // =============================
-
-  // ---- SINGLE PRECISION (32-bit) ----
-  TOKEN_ADDS,     // add.s
-  TOKEN_SUBS,     // sub.s
-  TOKEN_MULS,     // mul.s
-  TOKEN_DIVS,     // div.s
-  TOKEN_CVTSW,    // cvt.s.w
-
-  // ---- DOUBLE PRECISION (64-bit) ----
-  // TOKEN_ADDD,      // add.d
-  // TOKEN_SUBD,      // sub.d
-  // TOKEN_MULD,      // mul.d
-  // TOKEN_DIVD,      // div.d
-
-  // =============================
-  // SYSTEM CALL INSTRUCTIONS (SYSCALLS)
-  // =============================
-  TOKEN_SYSCALL,  // syscall
-  TOKEN_BREAK,    // break
-
-  // ---- 64-BIT INSTRUCTIONS ----
-  // TOKEN_SYSCALL64, // syscall (64-bit)
-  // TOKEN_BREAK64,   // break (64-bit)
-
-  // =============================
-  // META-TOKENS & STRUCTURAL
-  // =============================
-  TOKEN_EOF,        // End of file
-  TOKEN_ERROR,      // Error
-  TOKEN_UNKNOWN,    // Unknown token
-  TOKEN_NEWLINE,    // Newline
-  TOKEN_WHITESPACE, // Whitespace
-
-  // =============================
-  // DELIMITERS AND SEPARATORS
-  // =============================
-  TOKEN_COMMA,      // ,
-  TOKEN_COLON,      // :
-  TOKEN_SEMICOLON,  // ;
-  TOKEN_LPAREN,     // (
-  TOKEN_RPAREN,     // )
-  TOKEN_LBRACE,     // {
-  TOKEN_RBRACE,     // }
-
-  // =============================
-  // LITERALS AND IDENTIFIERS
-  // =============================
-  TOKEN_INT_LITERAL,   // Integer literal
-  TOKEN_FLOAT_LITERAL, // Floating point literal
-  TOKEN_IDENTIFIER,    // Identifier
-  TOKEN_REGISTER,      // Register (, , etc.)
-
-  // =============================
-  // OPERATORS
-  // =============================
-  TOKEN_PLUS,      // +
-  TOKEN_MINUS,     // -
-  TOKEN_STAR,      // *
-  TOKEN_SLASH,     // /
-  TOKEN_PERCENT,   // %
-  TOKEN_EQUAL,     // =
-
-  // =============================
-  // PREPROCESSOR AND DIRECTIVES
-  // =============================
-  TOKEN_DIRECTIVE, // .data, .text, etc.
-  TOKEN_MACRO      // macro
+    #define X(name, string) name,
+    TOKEN_TYPES_LIST
+    #undef X
 } TokenType;
+
+extern const char* tokenTypeNames[];
+
+const char* getTokenTypeName(TokenType type);
 
 #endif // TOKEN_TYPE_H
